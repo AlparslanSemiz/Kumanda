@@ -1,0 +1,42 @@
+name: Bug report
+description: Something in Kumanda doesn't work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open …
+        2. …
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: e.g. macOS 26.3
+    validations:
+      required: true
+  - type: input
+    id: mac
+    attributes:
+      label: Mac model
+      placeholder: e.g. MacBook Pro 13" M1, 2020
+  - type: dropdown
+    id: install
+    attributes:
+      label: How did you install it?
+      options: [install.sh, built from source]
+  - type: input
+    id: controller
+    attributes:
+      label: Controller
+      description: Model and mode, e.g. 8BitDo Pro 2 in X mode, Xbox Wireless, DualSense. `swift tools/padtest.swift` shows what macOS sees.
+    validations:
+      required: true

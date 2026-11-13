@@ -1,7 +1,7 @@
 #!/bin/zsh
-# Kumanda'yı derler, ~/Applications/Kumanda.app olarak kurar ve açar.
-#   ./build.sh               -> derle + kur + aç
-#   ./build.sh --no-install  -> sadece build/Kumanda.app üret
+# Builds Kumanda, installs it as ~/Applications/Kumanda.app and opens it.
+#   ./build.sh               -> build, install, open
+#   ./build.sh --no-install  -> only build build/Kumanda.app
 set -euo pipefail
 cd "${0:A:h}"
 
@@ -11,7 +11,7 @@ APP="$BUILD/Kumanda.app"
 
 rm -rf "$BUILD"; mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$BUILD/Kumanda.iconset"
 
-echo "→ simge"
+echo "→ icon"
 swift scripts/make_icon.swift "$BUILD/icon.png"
 for s in 16 32 128 256 512; do
   sips -z $s $s "$BUILD/icon.png" --out "$BUILD/Kumanda.iconset/icon_${s}x${s}.png" >/dev/null
@@ -19,7 +19,7 @@ for s in 16 32 128 256 512; do
 done
 iconutil -c icns "$BUILD/Kumanda.iconset" -o "$APP/Contents/Resources/Kumanda.icns"
 
-echo "→ derleme"
+echo "→ compile"
 swiftc -O Sources/main.swift -o "$APP/Contents/MacOS/Kumanda" -framework GameController
 
 cat > "$APP/Contents/Info.plist" <<PLIST
@@ -36,7 +36,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <key>CFBundleVersion</key><string>1</string>
 <key>LSMinimumSystemVersion</key><string>13.0</string>
 <key>LSUIElement</key><true/>
-<key>NSHumanReadableCopyright</key><string>Kontrolcüyle Mac'i kullan.</string>
+<key>NSHumanReadableCopyright</key><string>Use your Mac with a game controller.</string>
 </dict></plist>
 PLIST
 
@@ -45,17 +45,17 @@ SIGN_ID="-"
 if security find-identity -p codesigning 2>/dev/null | /usr/bin/grep -q "Veda Local Signing"; then
   SIGN_ID="Veda Local Signing"
 else
-  echo "  (not: yerel imza sertifikası yok, ad-hoc imza kullanılıyor)"
+  echo "  (no local signing certificate, signing ad hoc)"
 fi
 codesign --force -s "$SIGN_ID" --identifier "$BUNDLE_ID" "$APP"
 
 [[ "${1:-}" == "--no-install" ]] && { echo "✓ $APP"; exit 0; }
 
-echo "→ kurulum"
+echo "→ install"
 DEST="$HOME/Applications/Kumanda.app"
 pkill -x Kumanda 2>/dev/null || true
 mkdir -p "$HOME/Applications"
 rm -rf "$DEST"; cp -R "$APP" "$DEST"
 open "$DEST"
-echo "✓ Kumanda kuruldu ve açıldı."
-echo "  İlk açılışta: Sistem Ayarları → Gizlilik ve Güvenlik → Erişilebilirlik → Kumanda'yı aç."
+echo "✓ Kumanda installed and opened."
+echo "  First launch: System Settings → Privacy & Security → Accessibility → turn on Kumanda."

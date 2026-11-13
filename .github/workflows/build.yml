@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the app
+        run: ./build.sh --no-install
+      - name: Check the bundle
+        run: |
+          test -x build/Kumanda.app/Contents/MacOS/Kumanda
+          codesign --verify --verbose build/Kumanda.app
+          plutil -lint build/Kumanda.app/Contents/Info.plist
