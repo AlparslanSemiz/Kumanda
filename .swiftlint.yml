@@ -1,0 +1,14 @@
+# Kumanda is one compact file on purpose: short local names, some long lines.
+disabled_rules:
+  - identifier_name
+  - large_tuple
+  - statement_position
+  - trailing_comma
+  - file_length
+line_length: 180
+cyclomatic_complexity: 25
+function_body_length: 80
+excluded:
+  - build
+  - tools
+  - scripts
