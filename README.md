@@ -12,18 +12,23 @@ It works with any controller macOS supports: Xbox, PlayStation, 8BitDo and other
 
 | Control | Action |
 | --- | --- |
-| Left stick | Move the pointer |
+| Left stick | Move the pointer. Let go and, after a second, it glides onto the nearest button or link, if one is close |
 | Right stick | Scroll |
-| A | Left click (hold to drag, press twice to double-click) |
-| B | Right click |
-| X | Esc |
-| Y | ⌘ Space (Spotlight or Raycast) |
+| Bottom face button | Left click (hold to drag, press twice to double-click) |
+| Right face button | Right click |
+| Left face button | Esc |
+| Top face button | ⌘ Space (Spotlight or Raycast) |
 | Menu ☰ | Return |
 | View ⧉ | Mission Control |
 | LB / RB | Previous / next Space |
 | D-pad | Arrow keys (hold to repeat) |
 | Hold LT / RT | Slow, precise pointer / fast pointer |
+| Press the right stick, or Home | Start or stop [Dikte](https://github.com/yusufipk/dikte) dictation |
 | Press both sticks | Turn Kumanda on or off |
+
+Face buttons go by position, not by the letter printed on them, so the bottom one clicks on Xbox, PlayStation, Nintendo and 8BitDo pads alike. Kumanda guesses the layout from the controller's name; set it yourself under **Tuş düzeni** if it guesses wrong.
+
+**Snap to buttons.** Hitting small buttons with a stick is fiddly, so once the stick rests Kumanda looks for the nearest clickable thing (button, link, checkbox, menu item, text field) within about 90 points and glides onto it. On empty space it stays put, and it never moves a pointer you moved with the trackpad. Turn it off or change the wait (0.5 to 2 seconds) in the menu. It reads the screen through the Accessibility permission Kumanda already has.
 
 ## Games get the controller
 
@@ -57,6 +62,14 @@ If a code-signing certificate named "Veda Local Signing" exists (made by [Veda's
 
 ```sh
 pkill -x Kumanda; rm -rf ~/Applications/Kumanda.app ~/.config/kumanda ~/.local/src/Kumanda
+```
+
+## Lint
+
+`swiftlint` needs SourceKit. Without Xcode, point it at the Command Line Tools:
+
+```sh
+TOOLCHAIN_DIR=/Library/Developer/CommandLineTools swiftlint
 ```
 
 ## Requirements
