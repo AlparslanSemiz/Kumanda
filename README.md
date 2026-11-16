@@ -2,7 +2,8 @@
 
 <h1 align="center">Kumanda</h1>
 <p align="center">Use your Mac from the couch with a game controller.</p>
-<p align="center"><a href="https://github.com/AlparslanSemiz/Kumanda/actions/workflows/build.yml"><img src="https://github.com/AlparslanSemiz/Kumanda/actions/workflows/build.yml/badge.svg" alt="build"></a></p>
+<p align="center"><a href="https://github.com/AlparslanSemiz/Kumanda/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/AlparslanSemiz/Kumanda/build.yml?style=flat&label=build" alt="build"></a> <img src="https://img.shields.io/badge/macOS-13%2B-555?style=flat" alt="macOS 13+"> <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-555?style=flat" alt="MIT license"></a></p>
+<p align="center"><b>Install:</b> <code>curl -fsSL https://raw.githubusercontent.com/AlparslanSemiz/Kumanda/main/install.sh | zsh</code> · <a href="#install">details</a></p>
 
 Kumanda (Turkish for "remote control") is a small menu bar app for macOS. The left stick moves the pointer, the right stick scrolls, and the buttons click, switch Spaces and press keys. When a game comes to the front, Kumanda steps aside, so the game gets the controller to itself.
 
@@ -75,6 +76,10 @@ TOOLCHAIN_DIR=/Library/Developer/CommandLineTools swiftlint
 ## Requirements
 
 macOS 13 or later and the Xcode Command Line Tools (`xcode-select --install`).
+
+## Status
+
+Early: no tagged release yet, so it installs from source only (no Homebrew formula). The menu is in Turkish.
 
 ## License
 
