@@ -50,7 +50,10 @@ Or without Homebrew:
 curl -fsSL https://raw.githubusercontent.com/AlparslanSemiz/Kumanda/main/install.sh | zsh
 ```
 
-Both build Kumanda from source on your Mac, so they need Apple's Command Line Tools. The script installs the app to `~/Applications` and opens it; to start it at login, use the toggle in its menu. With Homebrew, use `brew services` instead of the menu toggle, so an upgrade keeps login start working. Either way, turn on **Kumanda** under System Settings → Privacy & Security → **Accessibility**.
+Both build Kumanda from source on your Mac, so they need Apple's Command Line Tools.
+
+- **Homebrew:** the app lives in `$(brew --prefix)/opt/kumanda/Kumanda.app`. Add that app with **+** under System Settings → Privacy & Security → **Accessibility**. Start it at login with `brew services`, and leave the menu's login toggle off, or Kumanda starts twice. Homebrew builds are signed ad hoc, so macOS asks for Accessibility again after each `brew upgrade`.
+- **Install script:** the app goes to `~/Applications` and opens. Turn on **Kumanda** under Accessibility, and use the toggle in its menu to start it at login.
 
 The menu is in Turkish for now.
 
@@ -72,7 +75,7 @@ If a code-signing certificate named "Veda Local Signing" exists (made by [Veda's
 
 ```sh
 # Homebrew
-brew services stop kumanda; brew uninstall kumanda
+brew services stop kumanda; brew uninstall kumanda; rm -f "$(brew --prefix)/var/log/kumanda.log"
 # install script
 pkill -x Kumanda; rm -rf ~/Applications/Kumanda.app ~/.local/src/Kumanda
 # settings (both)
